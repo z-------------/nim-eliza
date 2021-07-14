@@ -1,4 +1,3 @@
-import std/strutils
 when defined(js):
   import std/dom
 
