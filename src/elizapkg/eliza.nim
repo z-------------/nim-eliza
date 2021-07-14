@@ -18,7 +18,7 @@ const
     "YOUR": "MY",
     "IVE": "YOU'VE",
     "IM": "YOU'RE",
-    "YOU": "ME",
+    # "YOU": "ME",
     "ME": "YOU",
     "AM": "ARE",
     "WAS": "WERE",
