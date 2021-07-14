@@ -281,12 +281,20 @@ const
   ).toOrderedTable
   Separator = " "
 
+proc cleanInput(rawInput: string): string =
+  for c in rawInput:
+    # removes punctuation and sets to uppercase
+    if c.isAlphaAscii or c.isSpaceAscii:
+      result.add(c.toUpperAscii())
+
 proc initEliza*(): Eliza =
   result.whichReply = collect(initTable):
     for key in Responses.keys:
       {key: 0}
 
-proc tell*(e: var Eliza; inputStr: string): tuple[response: string, isContinue: bool] =
+proc tell*(e: var Eliza; rawInput: string): tuple[response: string, isContinue: bool] =
+  let inputStr = cleanInput(rawInput)
+
   # check for termination
   if inputStr == "BYE":
     return ("GOODBYE!  THANKS FOR VISITING WITH ME...", false)

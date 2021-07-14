@@ -37,15 +37,11 @@ proc printTitle() =
   print("HI!  I'M ELIZA.  WHAT'S YOUR PROBLEM?")
 
 proc getInput(): string =
-  let rawInput =
+  result =
     when defined(js):
       window.prompt(lastPrint, "")
     else:
       stdin.readLine()
-  for c in rawInput:
-    # removes punctuation and sets to uppercase
-    if c.isAlphaAscii or c.isSpaceAscii:
-      result.add(c.toUpperAscii())
   when defined(js):
     print("> " & result)
 
@@ -57,8 +53,8 @@ proc main() =
 
   while true:
     let
-      inputStr = getInput()
-      (response, isContinue) = eliza.tell(inputStr)
+      rawInput = getInput()
+      (response, isContinue) = eliza.tell(rawInput)
     print(response)
     if not isContinue:
       break
